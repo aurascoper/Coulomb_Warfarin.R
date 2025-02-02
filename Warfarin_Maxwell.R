@@ -17,7 +17,7 @@
 
 # -----------------------------------------------------------------------------
 # Integrated Shiny App: Warfarin-Albumin Molecular Dynamics + System Dynamics
-# Author: Your Name
+# Author: Aurascoper
 # Packages: shiny, bio3d, rgl, tidyverse, plotly
 # -----------------------------------------------------------------------------
 
