@@ -1,125 +1,84 @@
-# Technical Overview: Warfarin-Albumin Molecular Dynamics Simulation Framework
+Coulomb_Warfarin.R 
 
-## Abstract
-This document presents a computational framework for simulating warfarin-albumin molecular interactions and associated system dynamics. The implementation integrates molecular visualization, binding site analysis, and pharmacokinetic modeling within an interactive visualization environment.
+    An interactive computational framework for simulating and visualizing Warfarin-Human Serum Albumin (HSA) molecular interactions and system dynamics.
 
-## System Architecture
+Overview
 
-### 1. Molecular Structure Representation
+Coulomb_Warfarin.R is a molecular dynamics and pharmacokinetic simulation tool built in R. It provides a real-time, interactive environment to explore how the anticoagulant drug Warfarin binds to Human Serum Albumin (HSA). By combining spatial distribution analysis with system dynamics, this framework bridges the gap between atomic-level binding visualization and macroscopic pharmacological effects.
+Key Features
 
-#### 1.1 Protein Structure
-- Implementation of Human Serum Albumin (HSA) structure via PDB format (1AO6)
-- Spatial coordinates maintained in crystallographic reference frame
-- Atomic position vectors represented in Cartesian coordinate system
+    3D Molecular Visualization: Real-time, interactive rendering of the HSA protein structure (PDB: 1AO6) and a simplified Warfarin ligand using a Cartesian coordinate system.
 
-#### 1.2 Ligand Implementation
-- Simplified warfarin molecular structure
-- Eight-atom representation system
-- Coordinate generation with binding site alignment parameters
-- Atomic type classification system (C, O, H)
+    Electron Density & Binding Analysis: * Identifies and clusters binding pocket coordinates specifically targeting the Sudlow Site I (residues 195-198).
 
-### 2. Spatial Distribution Analysis
+        Calculates and visualizes spatial electron density using distance-weighted Gaussian distributions.
 
-#### 2.1 Electron Density Implementation
-- Gaussian distribution-based density function
-- Three-dimensional grid system implementation
-- Density calculation utilizing distance-weighted contributions
-- Parametric sigma coefficient for distribution control
+    Pharmacokinetic System Dynamics: Models temporal evolution of state variables, including free warfarin concentration, antibody dynamics, and erythrocyte metrics using threshold-based state transitions and deterministic decay.
 
-#### 2.2 Binding Site Analysis
-- Sudlow Site I identification algorithm
-- Residue-based filtering system (195-198 sequence range)
-- Spatial clustering of binding pocket coordinates
+    Interactive Dashboard: Built with Shiny and Plotly to allow users to manipulate atomic visualization parameters (opacity, radius) alongside multi-metric time-series plots.
 
-### 3. System Dynamics Framework
+Tech Stack & Dependencies
 
-#### 3.1 State Variables
-- Free warfarin concentration
-- Antibody concentration dynamics
-- Erythrocyte population metrics
+This project relies on the following R ecosystem tools:
 
-#### 3.2 Temporal Evolution
-- Deterministic decay processes
-- Threshold-based state transitions
-- Linear response functions
-- Time-step iteration methodology
+    R - Core statistical computing environment
 
-### 4. Visualization Architecture
+    Shiny - Web application framework for the interactive UI
 
-#### 4.1 Three-Dimensional Representation
-- Real-time molecular visualization system
-- Atomic radius parameterization
-- Color-coded element visualization
-- Interactive opacity and visibility controls
+    Bio3D - Molecular structure analysis and trajectory processing
 
-#### 4.2 Temporal Data Visualization
-- Multi-metric time series representation
-- Dynamic plot generation system
-- Interactive data selection framework
+    RGL - 3D visualization system
 
-## Implementation Methodology
+    Tidyverse - Data manipulation and processing
 
-### 1. Data Structures
-- Atomic coordinate matrices
-- Time series vectors
-- Grid-based density arrays
-- State transition matrices
+    Plotly - Interactive time-series data visualization
 
-### 2. Computational Methods
-- Distance calculation algorithms
-- Density function integration
-- State variable updates
-- Visualization transformations
+Installation & Usage
 
-### 3. Interface Architecture
-- Modular component design
-- State management system
-- Event-driven updates
-- Asynchronous rendering pipeline
+    Clone the repository:
+    Bash
 
-## System Constraints
+    git clone https://github.com/aurascoper/Coulomb_Warfarin.R.git
+    cd Coulomb_Warfarin.R
 
-### 1. Computational Limitations
-- Grid resolution parameters
-- Update frequency limitations
-- Memory utilization boundaries
+    Install required R packages:
+    Open your R console or RStudio and run:
+    R
 
-### 2. Model Simplifications
-- Rigid body approximations
-- Linear decay assumptions
-- Simplified binding kinetics
+    install.packages(c("shiny", "rgl", "tidyverse", "plotly"))
+    if (!requireNamespace("BiocManager", quietly = TRUE))
+        install.packages("BiocManager")
+    BiocManager::install("bio3d")
 
-## Performance Considerations
+    Run the Application:
+    You can launch the interactive dashboards directly from your R environment.
+    R
 
-### 1. Optimization Parameters
-- Grid density trade-offs
-- Rendering efficiency factors
-- Update frequency optimization
+    # Example command to run the main simulation (adjust based on your exact script execution)
+    shiny::runApp("Warfarin_Coulomb.R")
+    # or
+    shiny::runApp("Warfarin_Maxwell.R")
 
-### 2. Resource Allocation
-- Memory management strategies
-- Computational load distribution
-- Cache utilization optimization
+Architecture Under the Hood
 
-## Future Implementation Considerations
+The framework is divided into four main architectural pillars:
 
-### 1. Model Extensions
-- Additional binding site implementation
-- Complex kinetics modeling
-- Multiple ligand interaction systems
+    Molecular Structure Representation: Maintains spatial coordinates in a crystallographic reference frame, utilizing an eight-atom simplified representation for Warfarin.
 
-### 2. Performance Enhancements
-- Parallel computation implementation
-- GPU acceleration possibilities
-- Memory optimization strategies
+    Spatial Distribution: Implements a 3D grid system for distance-weighted density calculations.
 
-## Technical Dependencies
-- R statistical computing environment
-- Shiny web application framework
-- Bio3D molecular analysis toolkit
-- RGL visualization system
-- Tidyverse data manipulation framework
-- Plotly interactive visualization library
+    Temporal Evolution: Handles the mathematical iteration of system states, computing linear response functions and deterministic decay.
 
-## Conclusion
-This framework provides a foundation for molecular dynamics simulation and visualization, with particular emphasis on warfarin-albumin interactions. The modular architecture allows for future extensions and optimizations while maintaining computational efficiency.
+    Asynchronous Rendering Pipeline: Ensures the 3D molecular views and 2D pharmacokinetic plots update smoothly without blocking computational threads.
+
+Future Roadmap
+
+    Expansion to model multiple ligand interactions and secondary binding sites.
+
+    Implementation of complex binding kinetics beyond linear decay approximations.
+
+    Performance optimizations including GPU acceleration and parallel computation for higher-resolution grid densities.
+
+Contributing
+
+Contributions, issues, and feature requests are welcome! If you're interested in molecular dynamics or R-based data visualization, feel free to fork the repository and submit a pull request.
